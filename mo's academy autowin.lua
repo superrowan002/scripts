@@ -1,20 +1,11 @@
-rootPart = game.Players.LocalPlayer.Character.HumanoidRootPart
+local firstLesson
+local rootPart = game.Players.LocalPlayer.Character.HumanoidRootPart
 local args = {
     [1] = "Bat"
 }
 game:GetService("ReplicatedStorage").Remotes.TakeItem:FireServer(unpack(args))
-	end
 game:GetService("Players").LocalPlayer.Character.HB.Parent = game:GetService("Lighting")
 game:GetService("ReplicatedStorage").Remotes.SendCount.Parent = game:GetService("StarterPlayer")
-while wait() do
-    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-        local args = {
-            [1] = v,
-            [2] = workspace.Bat
-        }
-        game:GetService("ReplicatedStorage").Remotes.SendD:FireServer(unpack(args))
-    end
-end
 repeat -- Wait lesson 1
 	task.wait()
 until workspace.MathDoors:FindFirstChild("DoorOpen") or workspace.HistoryDoors:FindFirstChild("DoorOpen")
@@ -27,12 +18,12 @@ elseif workspace.HistoryDoors:FindFirstChild("DoorOpen") then
 end
 repeat -- Wait cafeteria
 	task.wait()
-until workspace.CafeteriaDoors:FindFirstChild("DoorsOpen"
+until workspace.CafeteriaDoors:FindFirstChild("DoorsOpen")
 rootPart.CFrame = game.Workspace.CafeteriaSmall.CafeteriaTables.CafeteriaTable.Chair.Seat.Part.CFrame
 repeat -- Wait lesson 2
 	task.wait()
 until workspace.ReadingDoors:FindFirstChild("DoorOpen")
-rootPart.CFrame = game.Workspace.CafeteriaSmall.CafeteriaTables.CafeteriaTable.Chair.Seat.Part.CFrame
+rootPart.CFrame = game.Workspace.ReadingDesks.Desk.Chair.Seat.Part.CFrame
 repeat -- Wait detention
 	task.wait()
 until workspace.DetentionDoors:FindFirstChild("DoorOpen")
@@ -44,43 +35,6 @@ repeat -- Wait leave detention
 	task.wait()
 until workspace.DetentionDoors:FindFirstChild("DoorOpen")
 rootPart.CFrame = game.Workspace.SpawnLocation.CFrame
-
--- Wait security system
--- Wait amount of seconds cutscene takes
-
-local args = {
-    [1] = "GreenKey"
-}
-game:GetService("ReplicatedStorage").Remotes.Key:FireServer(unpack(args))
-local args = {
-    [1] = "BlueKey"
-}
-game:GetService("ReplicatedStorage").Remotes.Key:FireServer(unpack(args))
-local args = {
-    [1] = "RedKey"
-}
-game:GetService("ReplicatedStorage").Remotes.Key:FireServer(unpack(args))
-rootPart.CFrame = game.Workspace.GateSense.CFrame
-repeat -- Wait lesson 3
-	task.wait()
-until workspace.ComputersDoors:FindFirstChild("DoorOpen")
-rootPart.CFrame = game.Workspace.ComputersDesks.Desk.Chair.Seat.Part.CFrame
-repeat -- Wait cafeteria
-	task.wait()
-until workspace.CafeteriaDoors:FindFirstChild("DoorsOpen")
-rootPart.CFrame = game.Workspace.CafeteriaSmall.CafeteriaTables.CafeteriaTable.Chair.Seat.Part.CFrame
-repeat -- Wait lesson 4
-	task.wait()
-until workspace.MathDoors:FindFirstChild("DoorOpen") or workspace.HistoryDoors:FindFirstChild("DoorOpen")
-if firstLesson == "Math" then
-	rootPart.CFrame = game.Workspace.HistoryDesks.Desk.Chair.Seat.Part.CFrame
-else
-	rootPart.CFrame = game.Workspace.MathDesks.Desk.Chair.Seat.Part.CFrame
-end
-repeat -- Wait detention
-	task.wait()
-until workspace.DetentionDoors:FindFirstChild("DoorOpen")
-rootPart.CFrame = game.Workspace.DetentionDesks.Desk.Chair.Seat.Part.CFrame
 
 -- Wait until game info: time is night
 -- Wait amount of seconds before hint
