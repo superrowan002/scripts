@@ -8,5 +8,5 @@ game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
 end)
 queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport) -- Execute script on teleport
 game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
-    queueteleport("loadstring(game:HttpGet("https://raw.githubusercontent.com/superrowan002/scripts/refs/heads/main/Mo's%20Academy%20Kill%20Aura.lua"))()")
+    queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/superrowan002/scripts/refs/heads/main/mo's%20academy%20kill%20aura.lua'))()")
 end)
