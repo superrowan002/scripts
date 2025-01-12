@@ -1,54 +1,57 @@
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+if game.PlaceId == 9000622508 then
+		local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "🐰 Mo's Academy 🐰", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+local GodMode = false
+local KillAura = false
+local player = game.Players.LocalPlayer
+local playerData = game:GetService("ReplicatedStorage").PlayerData:FindFirstChild(player.Name)
 
-local Window = Rayfield:CreateWindow({
-   Name = "🐰 Mo's Academy Script 🐰",
-   LoadingTitle = "Mo's Academy Hub",
-   LoadingSubtitle = "lol",
-   ConfigurationSaving = {
-      Enabled = false,
-      FolderName = nil,
-      FileName = "Mosacademyhub"
-   },
-   Discord = {
-      Enabled = false,
-      Invite = "noinvitelink",
-      RememberJoins = true
-   },
-   KeySystem = false,
-   KeySettings = {
-      Title = "Untitled",
-      Subtitle = "Key System",
-      Note = "No method of obtaining the key is provided",
-      FileName = "Key",
-      SaveKey = true,
-      GrabKeyFromSite = false,
-      Key = {"Hello"}
-   }
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
 })
 
-local MainTab = Window:CreateTab("Main", nil)
-local MainSection = MainTab:CreateSection("Main")
+Tab:AddToggle({
+	Name = "🛡 | God Mode",
+	Default = false,
+	Callback = function(Value)
+GodMode = Value
+	end
+})
 
-local Toggle = MainTab:CreateToggle({
-    Name = "Inf Money",
-    CurrentValue = false,
-    Flag = "InfMoney",
-    Callback = function(InfMoney)
-while InfMoney == true do
-    local player = game.Players.LocalPlayer
-    local playerData = game:GetService("ReplicatedStorage").PlayerData:FindFirstChild(player.Name)
-    playerData.Money.Value = 999
-    wait()
+Tab:AddToggle({
+	Name = "🗡 | Enemy Kill Aura",
+	Default = false,
+	Callback = function(Value)
+KillAura = Value
+	end
+})
+
+Tab:AddToggle({
+	Name = "🏦 | Infinite Money",
+	Default = false,
+	Callback = function(Value)
+InfMoney = Value
+	end
+})
+
+game:GetService("RunService").RenderStepped:Connect(function() 
+if player.Character:FindFirstChild("HB") and GodMode == true then
+     player.Character.HB.Parent = game:GetService("Lighting")
+elseif GodMode == false and game:GetService("Lighting"):FindFirstChild("HB") then
+     game:GetService("Lighting").HB.Parent = player.Character
 end
-    end,
- })
-
- local Toggle = MainTab:CreateToggle({
-    Name = "No Damage",
-    CurrentValue = false,
-    Flag = "NoDamage",
-    Callback = function(NoDamage)
-while NoDamage == true do
+end)
+game:GetService("RunService").RenderStepped:Connect(function() 
+if game:GetService("ReplicatedStorage").Remotes:FindFirstChild("SendCount") and GodMode == true then
+     game:GetService("ReplicatedStorage").Remotes.SendCount.Parent = playerData
+elseif GodMode == false and playerData:FindFirstChild("SendCount") then
+     playerData.SendCount.Parent = game:GetService("ReplicatedStorage").Remotes
+end
+end)
+game:GetService("RunService").RenderStepped:Connect(function() 
+if GodMode == true then 
     local UI = game:GetService("Players").LocalPlayer.PlayerGui.MetnalHealth.Frame
     local t = 1
 	local hue = tick() % (10/t) / (10/t)
@@ -63,15 +66,11 @@ while NoDamage == true do
 	UI.Border.TextLabel.TextColor3 = color2
 	UI.ImageLabel.ImageColor3 = color1
     wait()
+elseif GodMode == false then
+	-- Original colors
 end
-    end,
- })
-
-local Button = MainTab:CreateButton({
-    Name = "Delete Hitbox",
-    Callback = function()
-        local player = game.Players.LocalPlayer
-        local playerWorkspace = game.Workspace:FindFirstChild(player.Name)
-        playerWorkspace.HB:Destroy()
-    end,
- })
+end)
+game:GetService("RunService").RenderStepped:Connect(function() 
+if InfMoney == true then
+    playerData.Money.Value = 99999
+end)
