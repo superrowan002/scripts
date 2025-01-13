@@ -127,6 +127,6 @@ until game.Workspace.Enemies.MoBoss.Health == 0
 wait(12)
 queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport) -- Execute lobby script when teleported
 game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
-    queueteleport("loadstring(game:HttpGet("https://raw.githubusercontent.com/superrowan002/scripts/refs/heads/main/mo's%20academy%20autowin%20lobby.lua"))()")
+    queueteleport("loadstring(game:HttpGet(('https://raw.githubusercontent.com/superrowan002/scripts/refs/heads/main/mo's%20academy%20autowin%20lobby.lua')))()")
 end))
 game:GetService("TeleportService"):Teleport(8929050629) -- Teleport to lobby
