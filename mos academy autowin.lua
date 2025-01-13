@@ -1,3 +1,4 @@
+wait(5)
 game:GetService("RunService").RenderStepped:Connect(function() 
 	for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
 		local args = {
