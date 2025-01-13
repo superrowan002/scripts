@@ -1,3 +1,12 @@
+game:GetService("RunService").RenderStepped:Connect(function() 
+	for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+		local args = {
+		[1] = v,
+		[2] = workspace.Bat
+	}
+	game:GetService("ReplicatedStorage").Remotes.SendD:FireServer(unpack(args))
+		end
+	end)
 local firstLesson
 local rootPart = game.Players.LocalPlayer.Character.HumanoidRootPart
 local args = {
@@ -35,17 +44,58 @@ repeat -- Wait leave detention
 	task.wait()
 until workspace.DetentionDoors:FindFirstChild("DoorOpen")
 rootPart.CFrame = game.Workspace.SpawnLocation.CFrame
-
--- Wait until game info: time is night
--- Wait amount of seconds before hint
-
+repeat -- Wait security system
+	task.wait()
+until workspace:FindFirstChild("Security")
+rootPart.CFrame = game.Workspace.SpawnLocation.CFrame
+wait(40)
+local args = {
+    [1] = "RedKey"
+}
+game:GetService("ReplicatedStorage").Remotes.Key:FireServer(unpack(args))
+local args = {
+    [1] = "GreenKey"
+}
+game:GetService("ReplicatedStorage").Remotes.Key:FireServer(unpack(args))
+local args = {
+    [1] = "BlueKey"
+}
+game:GetService("ReplicatedStorage").Remotes.Key:FireServer(unpack(args))
+rootPart.CFrame = game.Workspace.GateSense.CFrame
+repeat -- Wait lesson 3
+	task.wait()
+until workspace.ComputersDoors:FindFirstChild("DoorOpen")
+rootPart.CFrame = game.Workspace.ComputersDesks.Desk.Chair.Seat.Part.CFrame
+repeat -- Wait cafeteria
+	task.wait()
+until workspace.CafeteriaDoors:FindFirstChild("DoorsOpen")
+rootPart.CFrame = game.Workspace.CafeteriaSmall.CafeteriaTables.CafeteriaTable.Chair.Seat.Part.CFramed
+repeat -- Wait lesson 4
+	task.wait()
+until workspace.MathDoors:FindFirstChild("DoorOpen") or workspace.HistoryDoors:FindFirstChild("DoorOpen")
+if firstLesson == "Math" then
+	rootPart.CFrame = game.Workspace.HistoryDesks.Desk.Chair.Seat.Part.CFrame
+else
+	rootPart.CFrame = game.Workspace.MathDesks.Desk.Chair.Seat.Part.CFrame
+end
+repeat -- Wait detention
+	task.wait()
+until workspace.DetentionDoors:FindFirstChild("DoorOpen")
+rootPart.CFrame = game.Workspace.DetentionDesks.Desk.Chair.Seat.Part.CFrame
+repeat -- Wait night
+	task.wait()
+until game:GetService("ReplicatedStorage").Data.TimeOfDay.Value == "Night"
+rootPart.CFrame = game.Workspace.DetentionDesks.Desk.Chair.Seat.Part.CFrame
+wait(36)
 fireclickdetector(workspace.Window1.SelectBox.ClickDetector)
 fireclickdetector(workspace.Window2.SelectBox.ClickDetector)
 fireclickdetector(workspace.Window3.SelectBox.ClickDetector)
 rootPart.CFrame = game.Workspace.Playground.Slide1.Main.CFrame
 
--- Wait until playground replaces
--- Teleport to the chase end
+repeat -- Wait playground chase
+	task.wait()
+until not game.Workspace.Playground
+rootPart.CFrame = game:GetService("ReplicatedStorage").Regions.EscapedRegion.CFrame
 
 repeat -- Wait lesson 5
 	task.wait()
@@ -71,9 +121,10 @@ repeat -- Wait Mo Spawn
 	task.wait()
 until workspace:FindFirstChild("MoHall")
 rootPart.CFrame = game.Workspace.GateSense.CFrame
-
--- Wait until gate opens
-
+repeat -- Wait Mo dead
+	task.wait()
+until game.Workspace.Enemies.MoBoss.Health == 0
+wait(12)
 queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport) -- Execute lobby script when teleported
 game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
     queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/superrowan002/scripts/refs/heads/main/mo's%20academy%20autowin%20lobby.lua'))()")
