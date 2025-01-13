@@ -1,3 +1,4 @@
+wait(5)
 local rootPart = game.Players.LocalPlayer.Character.HumanoidRootPart
 local function findFirstBus()
     local busNames = {"Bus1", "Bus2", "Bus3"}
